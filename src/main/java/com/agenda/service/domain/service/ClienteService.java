@@ -32,6 +32,15 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
+    public Cliente alterar(Long id, Cliente cliente){
+        Optional<Cliente> optCliente = this.buscarPorId(id);
+        if(optCliente.isEmpty()){
+            throw  new BusinessException("Cliente não cadastrado!");
+        }
+        cliente.setId(id);
+        return salvar(cliente);
+
+    }
     public List<Cliente> listarTodos(){
         return repository.findAll();
     }
